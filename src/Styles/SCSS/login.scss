@@ -1,13 +1,13 @@
-.signup-container{
-    border: 1px solid black;
+.login-container{
+    border: 1px solid red;
     height: 100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    .signup-form{
-        border: 1px solid green;
+    .login-form{
+        border: 1px solid blue;
         width: 400px;
         display: flex;
         align-items: center;

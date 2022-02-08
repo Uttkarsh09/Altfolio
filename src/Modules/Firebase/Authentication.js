@@ -1,18 +1,49 @@
-import {app, auth} from "./GetFirebaseInfo";
-import {createUserWithEmailAndPassword} from "firebase/auth";
-import { getFirebaseConfig } from "./FirebaseConfig";
+import { auth } from "./GetFirebaseInfo";
+import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { createUserDataDocument } from "./Update";
+import {getUserData} from "./QueryDocuments";
 
-
-function createUser(email, password){
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredentials)=>{		
+async function createUser(email, password, displayName){
+    try{
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
         const user = userCredentials.user;
-        console.log("User created ");
-        console.log(user)
-    })
-    .catch(err=>{
+        const newUserData = {
+            uid: user.uid,
+            currenciesOwned: [],
+        };
+        // console.log(user);
+        await updateUserProfile(displayName)
+        await createUserDataDocument(newUserData);
+        console.log("User created Completely");
+        return newUserData;
+    } catch (err){
         console.log(`err - ${err.code} ${err.message}`);
-    })
+        return false;
+    }
 }
 
-export {createUser};
+async function updateUserProfile(displayName){
+    try{
+        await updateProfile(auth.currentUser, {
+            displayName: displayName
+        })
+        console.log("display name updated"); 
+    } catch (err){
+        console.log("ERROR WHILE UPDATING DISPLAY NAME", err);
+    }
+}
+
+function enableOnAuthStateChanged(handleUserSignedIn){
+    const unsubscribe = onAuthStateChanged(auth, (user)=>{
+        // console.log("subscribing to uthStateChanged");
+        if(user){
+            handleUserSignedIn(user);
+        } else {
+            console.log("user not found (onAuthStateChanged)");
+        }
+    })
+
+    return unsubscribe;
+}
+
+export {createUser, updateUserProfile, enableOnAuthStateChanged};
