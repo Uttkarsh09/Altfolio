@@ -1,3 +1,3 @@
-make sure to have sass installed - npm install -g sass
+## EDI Project
 
-it is used to convert the SCSS to CSS.
+wont run out of the box as, firebase credentials aren't in this repo : )

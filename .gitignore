@@ -1,7 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # Custom Files to ignore
-firebaseConfig.js
+firebaseConfig.env
+fbConfig.js
+/src/Styles/CSS
 
 # dependencies
 /node_modules

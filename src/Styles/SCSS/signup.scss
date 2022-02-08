@@ -1,0 +1,12 @@
+.signup-container{
+    border: 1px solid black;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .signup-form{
+        border: 1px solid green;
+    }
+}

@@ -3,6 +3,7 @@ import Signup from "./Components/Signup/Signup";
 import Home from "./Components/Main/Home";
 import UserProfile from "./Components/Profile/UserProfile";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import "./Styles/CSS/style.css";
 
 function App() {
 	return (
