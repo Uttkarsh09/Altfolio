@@ -1,16 +1,27 @@
+/* eslint-disable no-unused-vars */
 import React, {useRef, useEffect} from 'react';
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/login.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {enableOnAuthStateChanged} from "../../Modules/Firebase/Authentication";
 
+function compare(a, b){
+	if(a.id < b.id){
+		return -1;
+	}
+	else if(a.id > b.id){
+		return 1;
+	}
+	return 0;
+}
+
 function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
-	// eslint-disable-next-line no-unused-vars
 	const [_, setUserCredentials] = useUserCredentials();
+	const navigate = useNavigate();
 
 	useEffect(()=>{
 		console.log("loginRendered");
@@ -19,7 +30,9 @@ function Login() {
 			if(user){
 				getUserData(user.uid).then(userData=>{
 					console.log(userData);
+					userData.coinsOwned = userData.coinsOwned.sort(compare);
 					setUserCredentials(userData);
+					navigate("/home");
 				})
 			}
 		}
@@ -30,7 +43,7 @@ function Login() {
 			unsubscribe()
 		};
 
-	}, [setUserCredentials]);
+	}, [setUserCredentials, navigate]);
 
 	const onSubmit = (event) => {
 		event.preventDefault();

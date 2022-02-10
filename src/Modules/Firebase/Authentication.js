@@ -9,7 +9,8 @@ async function createUser(email, password, displayName){
         const user = userCredentials.user;
         const newUserData = {
             uid: user.uid,
-            currenciesOwned: [],
+            coinsOwned: [],
+            totalMoneyInvested: 0,
         };
         // console.log(user);
         await updateUserProfile(displayName)

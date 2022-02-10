@@ -3,8 +3,9 @@ import React, {createContext, useContext, useState} from 'react';
 const userContext = createContext();
 
 function UserContext(props) {
-    const [userCredentials, setUserCredentials] = useState({user: null});
-    
+    const [userCredentials, setUserCredentials] = useState();
+    console.log("HERE IN THE CONTEXT");
+
     return <userContext.Provider value={[userCredentials, setUserCredentials]}>
         {props.children}
     </userContext.Provider>;
