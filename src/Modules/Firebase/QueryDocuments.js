@@ -8,8 +8,9 @@ async function getUserData(userId){
 
 	if(!querySnapshot.empty){
 		const snapshot = querySnapshot.docs[0];
+		const documentID = snapshot.id;
 		const data = snapshot.data();
-		return data;
+		return {...data, documentID};
 	} else {
 		return false;
 	}

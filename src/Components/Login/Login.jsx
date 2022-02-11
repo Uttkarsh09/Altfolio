@@ -31,7 +31,7 @@ function Login() {
 			if(user){
 				getUserData(user.uid)
 				.then(userData=>{
-					console.log(userData);
+					// console.log(userData);
 					userData.coinsOwned = userData.coinsOwned.sort(compare);
 					getCoinList()
 					.then(coinList=>{
