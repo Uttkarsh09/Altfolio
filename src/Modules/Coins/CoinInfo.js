@@ -1,14 +1,13 @@
-async function getCoinList(){
-    const res = await fetch("https://api.coingecko.com/api/v3/coins/list");
-    let json;
-    if(res.ok){
-        console.log("Coins List recieved");
-        json = await res.json();
-        console.log(json)
-        return json;
-    } else {
-        console.log("Error while recieveing coin list");
-    }
+function getCoinList(){
+    return fetch("https://api.coingecko.com/api/v3/coins/list", {
+        mode: "cors"
+    })
+    .then((res)=>res.text())
+    .then((data)=>{
+        return new Promise((resolve, reject)=>{
+            resolve(data ? JSON.parse(data) : {})
+        })
+    })
 }
 
 async function getCoinsInfo(coins){
