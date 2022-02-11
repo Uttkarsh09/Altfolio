@@ -6,6 +6,7 @@ import DetailedView from './DetailedView';
 import "../../Styles/CSS/home.css";
 import {getCoinsInfo} from "../../Modules/Coins/CoinInfo";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
+import AddCoinForm from './AddCoinForm';
 
 const tempUserCredentialsStructure = {
     "coinsOwned": [],
@@ -16,14 +17,18 @@ const tempUserCredentialsStructure = {
 
 function Home() {
 	const navigate = useNavigate();
+    const [userCredentials, _] = useUserCredentials();
 	const [isLoading, setIsLoading] = useState(false);
 	const [coinInfo, setCoinInfo] = useState([]);
-    const [userCredentials, _] = useUserCredentials();
+	const [showAddForm, setShowAddForm] = useState(false);
+	const [allCoinsList, setAllCoinsList] = useState(false);
 	
+	const showAddNewCoinForm = () => { setShowAddForm(true); }
+	const hideAddNewCoinForm = () => { setShowAddForm(false); }
+
 	useEffect(()=>{
         getCoinsInfo(userCredentials.coinsOwned)
 		.then(detailedCoinsInfo=>{
-			console.log(detailedCoinsInfo);
             setCoinInfo(()=>detailedCoinsInfo)
         })
 		.catch(err=>{
@@ -38,9 +43,21 @@ function Home() {
 		</div>
 
 		<div className='info-container'>
-			<CoinList isLoading={isLoading} coinInfo={coinInfo} />
+			<CoinList 
+				isLoading={isLoading} 
+				coinInfo={coinInfo} 
+				onAddCoinHandler={showAddNewCoinForm}
+			/>
 			<DetailedView />
 		</div>
+
+		{
+			showAddForm ? 
+			<AddCoinForm 
+				onCloseHandler={hideAddNewCoinForm} 
+			/> : ""
+		}
+
 	</div>;
 }
 

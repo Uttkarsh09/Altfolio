@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
 .home-container{
     // border: 1px solid red;
     width: 100vw;
     height: 100vh;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
 
     .nav-bar{
         border: 1px solid black;
@@ -35,14 +39,73 @@
         position: relative;
         // max-height: 92vh;
 
-        .coin-list{
+        .coin-list-container{
             border: 1px solid rgb(81, 81, 236);
             border-radius: 10px;
             width: 40%;
-
-            .coin-card{
-                border: 1px solid black;
+            padding: 5px;
+            position: relative;
+            // overflow-y: scroll;
+            
+            .coin-list{
+                .coin-card{
+                    border: 2px solid black;
+                    margin-bottom: 5px;
+                    height: 70px;
+                    border-radius: 10px;
+                    padding: 5px 15px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-family: 'Poppins', sans-serif;
+                    &:hover{
+                        cursor: pointer;
+                    }
+    
+                    .title{
+                        // border: 1px solid black;
+                        font-weight: 600;
+                        display: flex;
+                        align-items: center;
+    
+                        .icon{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                        }
+                        .name{
+                            font-size: 25px;
+                            margin-left: 10px;
+                        }
+                        .currency{
+                            color: rgb(105, 105, 105);
+                            font-size: 12px;
+                        }
+                    }
+                    .price{
+                        font-weight: 600;
+                        font-size: 19px;
+                    }
+                }
             }
+
+            .add-coin-btn{
+                position: absolute;
+                bottom: 5px;
+                border: 2px solid black;
+                width: 97%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Poppins', sans-serif;
+                font-size: 40px;
+                border-radius: 10px;
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+
         }
 
         .detailed-view{
@@ -52,6 +115,68 @@
             
         }
 
+    }
+
+    .add-coin-form{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid black;
+        border-radius: 10px;
+        height: 300px;
+        width: 500px;
+        background-color: white;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .close-form{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-weight: 800;
+            // border: 1px solid black;
+            height: 25px;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .title{
+            font-weight: 600;
+            font-size: 30px;
+            // border: 1px solid black;
+            display: flex;
+            justify-content: center;
+        }
+
+        form{
+            border: 1px solid black;
+            height: 100%;
+            padding: 10px 0px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-weight: 500;
+            font-size: 20px;
+            
+            .user-input{
+                border: 1px solid purple;
+                width: 100%;
+            }
+
+            .submit{
+                border: 1px solid red;
+                width: 100px;
+                margin-top: 50px;
+            }
+        }
     }
 
 }

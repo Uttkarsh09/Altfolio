@@ -6,6 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {enableOnAuthStateChanged} from "../../Modules/Firebase/Authentication";
+import {getCoinList} from "../../Modules/Coins/CoinInfo";
 
 function compare(a, b){
 	if(a.id < b.id){
@@ -28,11 +29,20 @@ function Login() {
 		const handleUserSignedIn = () => {
 			const user = auth.currentUser;
 			if(user){
-				getUserData(user.uid).then(userData=>{
+				getUserData(user.uid)
+				.then(userData=>{
 					console.log(userData);
 					userData.coinsOwned = userData.coinsOwned.sort(compare);
-					setUserCredentials(userData);
-					navigate("/home");
+					getCoinList()
+					.then(coinList=>{
+						console.log({...userData, coinList});
+						setUserCredentials({...userData, coinList});
+						navigate("/home");
+					})
+					.catch(err=>{
+						console.log("error while fetching coinList");
+						console.error(err);
+					})
 				})
 			}
 		}
