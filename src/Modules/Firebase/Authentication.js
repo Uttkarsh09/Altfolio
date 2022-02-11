@@ -1,6 +1,6 @@
 import { auth } from "./GetFirebaseInfo";
 import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
-import { createUserDataDocument } from "./Update";
+import { createUserDataDocument } from "./UpdateDocument";
 import {getUserData} from "./QueryDocuments";
 
 async function createUser(email, password, displayName){

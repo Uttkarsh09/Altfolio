@@ -12,4 +12,8 @@ async function createUserDataDocument(data){
 	}
 }
 
-export { createUserDataDocument };
+async function updateCoinsPurchased(coinsPurchased){
+
+}
+
+export { createUserDataDocument, updateCoinsPurchased };
