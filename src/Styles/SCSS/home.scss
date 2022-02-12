@@ -45,9 +45,15 @@
             width: 40%;
             padding: 5px;
             position: relative;
-            // overflow-y: scroll;
             
             .coin-list{
+                // border: 1px solid red;
+                height: 90%;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {     // this is to hide scrollbar
+                    display: none;
+                }
+
                 .coin-card{
                     border: 2px solid black;
                     margin-bottom: 5px;
@@ -100,6 +106,8 @@
                 font-family: 'Poppins', sans-serif;
                 font-size: 40px;
                 border-radius: 10px;
+                z-index: 100;
+                background-color: white;
 
                 &:hover{
                     cursor: pointer;
