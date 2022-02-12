@@ -8,6 +8,7 @@ This is a simple crypto currency portfolio management site made using react and 
   <li>Some more metrics along with that</li>
   <li>And I dont know, maybe i'll add some, maybe I'llremove some...</li>
   <li>Only time🕒 and college🎓 deadline will tell that💀</li>
+  <li>For time being responsiveness is not given much importance</li>
 </ul>
   
 
