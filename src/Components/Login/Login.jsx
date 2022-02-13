@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {enableOnAuthStateChanged} from "../../Modules/Firebase/Authentication";
-import {getCoinList} from "../../Modules/Coins/CoinInfo";
+import {getCoinList, fetchCoin} from "../../Modules/Coins/CoinInfo";
 
 function compare(a, b){
 	if(a.id < b.id){
@@ -31,13 +31,17 @@ function Login() {
 			if(user){
 				getUserData(user.uid)
 				.then(userData=>{
-					// console.log(userData);
 					userData.coinsOwned = userData.coinsOwned.sort(compare);
 					getCoinList()
 					.then(coinList=>{
-						console.log({...userData, coinList});
-						setUserCredentials({...userData, coinList});
-						navigate("/home");
+						// fetching USDT for USDtoINR conversion
+						fetchCoin("tether").then((coinData)=>{
+							coinData.json().then(coinData=>{
+								console.log({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
+								setUserCredentials({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
+								navigate("/home");
+							})
+						})
 					})
 					.catch(err=>{
 						console.log("error while fetching coinList");

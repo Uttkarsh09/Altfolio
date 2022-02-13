@@ -21,14 +21,24 @@ function Home() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [coinInfo, setCoinInfo] = useState([]);
 	const [showAddForm, setShowAddForm] = useState(false);
-	const [allCoinsList, setAllCoinsList] = useState(false);
-	
+	const [coinToShowInDetailedView, setCoinToShowInDetailedView] = useState(false);
 	const showAddNewCoinForm = () => { setShowAddForm(true); }
 	const hideAddNewCoinForm = () => { setShowAddForm(false); }
+
+	const updateCoinToShowInDetailedView = (coinID) => {
+		coinInfo.every((coin, idx)=>{
+			if(coin.id === coinID){
+				setCoinToShowInDetailedView({...coin});
+				return false;
+			}
+			return true;
+		})
+	}
 
 	useEffect(()=>{
         getCoinsInfo(userCredentials.coinsOwned)
 		.then(detailedCoinsInfo=>{
+			console.log(detailedCoinsInfo);
             setCoinInfo(()=>detailedCoinsInfo)
         })
 		.catch(err=>{
@@ -47,8 +57,9 @@ function Home() {
 				isLoading={isLoading} 
 				coinInfo={coinInfo} 
 				onAddCoinHandler={showAddNewCoinForm}
+				updateCoinToShowInDetailedView={updateCoinToShowInDetailedView}
 			/>
-			<DetailedView />
+			<DetailedView coin={coinToShowInDetailedView} />
 		</div>
 
 		{

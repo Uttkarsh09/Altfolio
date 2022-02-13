@@ -36,7 +36,9 @@ function fetchCoin(coinID){
         developer_data: false,
         sparkline: true
     });
-    return fetch(query);
+    return fetch(query, {
+        mode: "cors"
+    });
 }
 
-export {getCoinList, getCoinsInfo};
+export {getCoinList, getCoinsInfo, fetchCoin};

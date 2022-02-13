@@ -117,12 +117,103 @@
         }
 
         .detailed-view{
-            border: 1px solid red;
+            border: 1px solid black;
             border-radius: 10px;
-            width: 100%;   // This is 100 as it will take rest of the remaining space, if giving error convert to 60%
-            
-        }
+            width: 100%;   // This is 100 as it will take rest of the remaining space, if giving error convert to 70%
+            overflow-y: scroll;
+            &::-webkit-scrollbar {     // this is to hide scrollbar
+                display: none;
+            }
+            position: relative;
 
+            .sell-btn{
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                padding: 10px 20px;
+                border: none;
+                background-color: rgb(238, 39, 39);
+                font-weight: 600;
+                color: white;
+                border-radius: 10px;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: rgb(235, 11, 11);
+                }
+            }
+            .info{
+                border: 1px solid black;
+                border-radius: 10px;
+                position: relative;
+                
+                .stats{
+                    padding: 10px;
+                    .title{
+                        display: flex;
+                        justify-content: space-between;
+                        padding-top: 10px;
+                        // border: 1px solid blue;
+                        align-items: center;
+
+                        .name-exchg{
+                            // border: 1px solid red;
+                            display: flex;
+                            align-items: center;
+                            .icon{ width: 80px; }
+                            .name{
+                                font-size: 40px;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                padding-left: 10px;
+                            }
+                            .exchange{
+                                color: #696969;
+                                font-weight: 600;
+                            }
+                        }
+                        .price{
+                            // border: 1px solid green;
+                            display: flex;
+                            align-items: center;
+                            font-weight: 600;
+                            font-size: 40px;
+                            color: #3a3a3a;
+                            padding-right: 20px;
+                        }
+                    }
+
+                    .user-gain{
+                        // border: 1px solid black;
+                        display: flex;
+                        font-size: 20px;
+                        font-weight: 500;
+                        
+                        .gain-data{  
+                            margin-right: 30px;
+
+                            .gain, .gain-percent{
+                                // border: 1px solid red;
+                                margin-top: 10px;
+                                .profit{ color: green; }
+                                .loss{ color: red; }
+                            } 
+                            
+                            .gain .text, .gain-percent .text{
+                                display: inline-block;
+                                width: 190px;
+                                // border: 1px solid blue;
+                            }
+                        }
+                    }
+
+                    .extra-info{
+                        border: 1px solid purple;
+                    }
+                }
+            }
+
+        }
     }
 
     .add-coin-form{

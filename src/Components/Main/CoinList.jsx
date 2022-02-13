@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Loading from "./Loading";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 
-function CoinList({isLoading, coinInfo, onAddCoinHandler}){
+function CoinList({isLoading, coinInfo, onAddCoinHandler, updateCoinToShowInDetailedView}){
     const [userCredentials, setUserCredentials] = useUserCredentials();
 
 	return <div className="coin-list-container">
@@ -12,7 +12,13 @@ function CoinList({isLoading, coinInfo, onAddCoinHandler}){
 			<div className="coin-list">
 				{
                     coinInfo.map(coin => {
-                        return <CoinCard coin={coin} key={coin.name} />
+                        return (
+                            <CoinCard 
+                                coin={coin} 
+                                key={coin.name} 
+                                updateCoinToShowInDetailedView={updateCoinToShowInDetailedView}
+                            />
+                        )
                     })
                 }
 			</div>
@@ -23,12 +29,12 @@ function CoinList({isLoading, coinInfo, onAddCoinHandler}){
 	</div>
 }
 
-function CoinCard({coin}){
+function CoinCard({coin, updateCoinToShowInDetailedView}){
     const name = coin.name;
     const currentPrice = coin.market_data.current_price.inr;
     const image = coin.image;
 
-    return <div className="coin-card">
+    return <div className="coin-card" onClick={()=>updateCoinToShowInDetailedView(coin.id)}>
         <div className="title">
             <img src={image.small} alt={`${name} logo`} className="icon" />
             <span className="name">{name}</span>
