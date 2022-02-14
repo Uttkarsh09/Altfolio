@@ -8,34 +8,34 @@ import AutoComplete from '../Utilities/AutoComplete';
 function AddCoinForm({onCloseHandler}) {
 	const coinRef = useRef();
 	const qtyRef = useRef();
-	const avgRef = useRef();
+	const bpRef = useRef();
 	const [userCredentials, setUserCredentials] = useUserCredentials();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const coin = coinRef.current.value;
 		const qty = parseFloat(qtyRef.current.value);
-		const avgBP = parseFloat(avgRef.current.value);
-		let coinExists = findCoinInfo({
-				coinList: userCredentials.coinList, 
-				coinID: coin,
-			});
-		console.log(coin, qty, avgBP);
-
-		if(!coinExists){
+		const buyingPrice = parseFloat(bpRef.current.value);
+		console.log(coin, qty, buyingPrice);
+		
+		let coinExists = findCoinInfo({ coinList: userCredentials.coinList, coinID: coin });
+		if(!coinExists)
+		{
 			alert(`The coin with ID ${coin} does not exist`);
 			return;
 		}
 
 		let coinUpdated = false;
 		const coinsOwned = userCredentials.coinsOwned;
+
+		// If coinUpdated is false after this loop, means that the coin values weren't updated and a new coin was added
 		coinsOwned.every((coinOwned, idx) => {
 			if(coinOwned.id === coin){
 				console.log("in it ")
 				const oldQty = parseFloat(coinOwned.qty);
-				const oldAvg = parseFloat(coinOwned.avgBP);
-				coinOwned.avgBP = ((oldQty * oldAvg)+(qty*avgBP))/(oldQty+qty);
+				const oldInvestedAmount = parseFloat(coinOwned.investedAmount);
 				coinOwned.qty += qty;
+				coinOwned.investedAmount = oldInvestedAmount + buyingPrice;
 				coinUpdated = true;
 				return false;
 			}
@@ -44,16 +44,12 @@ function AddCoinForm({onCloseHandler}) {
 		
 		// This means that a new coin is entered
 		if(!coinUpdated){
-			// const newCoinInfo = findCoinInfo({
-			// 	coinList: userCredentials.coinList, 
-			// 	coinID: coin,
-			// })
 			coinsOwned.push({
 				id: coin,
 				name: coinExists.name,
 				symbol: coinExists.symbol,
 				qty: qty,
-				avgBP: avgBP,
+				investedAmount: buyingPrice,
 			})
 		}
 
@@ -94,11 +90,11 @@ function AddCoinForm({onCloseHandler}) {
 					</div>
 					<div>
 						<label htmlFor="qty">Qty</label>
-						<input type="number" id="qty" ref={qtyRef} />
+						<input type="number" id="qty" ref={qtyRef} step={0.00001} min={0.00001} />
 					</div>
 					<div>
-						<label htmlFor="avg">Average Price</label>
-						<input type="number" id="avg" ref={avgRef} />
+						<label htmlFor="bp">Buying Price</label>
+						<input type="number" id="bp" ref={bpRef} step={0.00001} min={0.00001} />
 					</div>
 				</div>
 				<input type="submit" className='submit' />

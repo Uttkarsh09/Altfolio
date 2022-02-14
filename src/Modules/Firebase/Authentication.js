@@ -1,5 +1,5 @@
 import { auth } from "./GetFirebaseInfo";
-import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { createUserDataDocument } from "./UpdateDocument";
 import {getUserData} from "./QueryDocuments";
 
@@ -11,6 +11,7 @@ async function createUser(email, password, displayName){
             uid: user.uid,
             coinsOwned: [],
             totalMoneyInvested: 0,
+            realizedGain: 0
         };
         // console.log(user);
         await updateUserProfile(displayName)
@@ -47,4 +48,9 @@ function enableOnAuthStateChanged(handleUserSignedIn){
     return unsubscribe;
 }
 
-export {createUser, updateUserProfile, enableOnAuthStateChanged};
+function logout(){
+    const auth = getAuth();
+    return signOut(auth)
+}
+
+export {createUser, updateUserProfile, enableOnAuthStateChanged, logout};

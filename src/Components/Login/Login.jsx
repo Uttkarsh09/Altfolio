@@ -26,7 +26,7 @@ function Login() {
 
 	useEffect(()=>{
 		console.log("loginRendered");
-		const handleUserSignedIn = () => {
+		const handleUserLogIn = () => {
 			const user = auth.currentUser;
 			if(user){
 				getUserData(user.uid)
@@ -51,7 +51,7 @@ function Login() {
 			}
 		}
 		
-		const unsubscribe = enableOnAuthStateChanged(handleUserSignedIn);
+		const unsubscribe = enableOnAuthStateChanged(handleUserLogIn);
 		return () => {
 			// console.log("Unsubscribing");
 			unsubscribe()

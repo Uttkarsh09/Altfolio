@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useUserCredentials } from '../../Modules/Context/UserContext';
 import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js';
@@ -14,44 +15,39 @@ ChartJS.register(
 	Legend
   );
 
-const sellCoinHandler = ({coinID}) => {
-	console.log("sell coin handler pressed")
-}
-
 const currencyFormat = Intl.NumberFormat("en-US", {
 	style: "currency",
 	currency: "INR"
 })
 
-function DetailedView({coin}){
+function DetailedView({showSellCoinForm, coin}){
 	return <div className="detailed-view">
 		{coin ? 
-		<View coin={coin} />
+		<View showSellCoinForm={showSellCoinForm} coin={coin} />
 		: ""}
 	</div>
 }
 
-function View({coin}){
+function View({showSellCoinForm, coin}){
 	let options, data;
-	const [userCredentials, _] = useUserCredentials();
-	let qty, avgBP;
+	const [userCredentials, setUserCredentials] = useUserCredentials();
+	let qty, investedAmount;
 
 	userCredentials.coinsOwned.forEach(c => {
 		if(c.id === coin.id){
 			qty = c.qty;
-			avgBP = c.avgBP;
+			investedAmount = c.investedAmount;
 		}
 	});
 	
-	const currentPrice = coin.market_data.current_price.inr;
-	const investedValue = qty * avgBP;
-	const currentValue = qty * currentPrice;
-	const gain = Math.round(currentValue-(investedValue), 2);
-	const gainPercent = Math.round((gain/(avgBP*qty))*100, 2);
+	const currentCoinPrice = coin.market_data.current_price.inr;
+	const currentValue = qty * currentCoinPrice;
+	const gain = Math.round(currentValue-investedAmount, 2);
+	const gainPercent = Math.round((gain/investedAmount)*100, 2);
 	let pl;
 	if(gain < 0){pl = 'loss'}
 	else { pl = 'profit'; }
-	console.log(qty, avgBP, currentPrice, gain, gainPercent);
+	console.log(qty, currentCoinPrice, gain, gainPercent);
 
 	if(coin){
 		options = {
@@ -77,7 +73,7 @@ function View({coin}){
 		let labels = [];
 		for(let i=0 ; i<(24*7)-4 ; i++){
 			d.setHours(d.getHours() - 2);
-			labels.push(moment().subtract(i, 'h').format("Do MMM h a"));
+			labels.push(moment().subtract(i, 'h').format("Do ha"));
 		}
 		labels = labels.reverse()
 		console.log(labels)
@@ -103,7 +99,7 @@ function View({coin}){
 	return(<>
 			<button 
 				className="sell-btn" 
-				onClick={()=>{sellCoinHandler(coin.id)}}
+				onClick={()=>{showSellCoinForm(coin.id)}}
 			>
 				SELL
 			</button>
@@ -128,7 +124,7 @@ function View({coin}){
 						</div>
 					</div>
 					<div className='price'>
-						{currencyFormat.format(currentPrice)}
+						{currencyFormat.format(currentCoinPrice)}
 					</div>
 				</div>
 
@@ -146,7 +142,7 @@ function View({coin}){
 					<div className='gain-data'>
 						<div className='gain'>
 							<span className='text'>Invested Amount</span>
-							<span className={pl}>{currencyFormat.format(investedValue)}</span>
+							<span className={pl}>{currencyFormat.format(investedAmount)}</span>
 						</div>
 						<div className='gain-percent'>
 							<span className='text'>Current Value</span>
