@@ -50,7 +50,7 @@
     }
 
     .info-container{
-        border: 1px solid green;
+        // border: 1px solid green;
         max-width: 100vw;
         height: 92vh;
         display: flex;
@@ -84,6 +84,7 @@
                     font-family: 'Poppins', sans-serif;
                     &:hover{
                         cursor: pointer;
+                        background: #d1d1d1;
                     }
     
                     .title{
@@ -129,6 +130,7 @@
 
                 &:hover{
                     cursor: pointer;
+                    background: rgb(170, 170, 170);
                 }
             }
 
@@ -157,7 +159,7 @@
 
                 &:hover{
                     cursor: pointer;
-                    background-color: rgb(255, 0, 0);
+                    background-color: rgb(189, 1, 1);
                 }
             }
             .info{
@@ -227,10 +229,23 @@
 
                     .extra-info{
                         // border: 1px solid purple;
+                        margin-top: 15px;
+
+                        .block{
+                            font-size: 16px;
+                            margin-top: 9px;
+                            .text{
+                                width: 190px;
+                                font-weight: 500;
+                                display: inline-block;
+                            }
+                            .data{
+                                color: rgb(63, 63, 63);
+                            }
+                        }
                     }
                 }
             }
-
         }
     }
 
@@ -239,7 +254,6 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        border: 1px solid black;
         border-radius: 10px;
         height: 300px;
         width: 500px;
@@ -247,6 +261,7 @@
         padding: 10px;
         display: flex;
         flex-direction: column;
+        background-color: rgb(158, 235, 158);
 
         .close-form{
             position: absolute;
@@ -266,7 +281,7 @@
         }
 
         .title{
-            font-weight: 600;
+            font-weight: 500;
             font-size: 30px;
             // border: 1px solid black;
             display: flex;
@@ -274,7 +289,8 @@
         }
 
         form{
-            border: 1px solid black;
+            background-color: rgb(194, 245, 194);
+            border-radius: 10px;
             height: 100%;
             padding: 10px 0px;
             display: flex;
@@ -282,16 +298,46 @@
             flex-direction: column;
             font-weight: 500;
             font-size: 20px;
+            padding: 20px;
             
             .user-input{
-                border: 1px solid purple;
+                // border: 1px solid purple;
                 width: 100%;
+
+                .block{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    label{
+                        display: inline-block;
+                        width: 35%;
+                    }
+                    input{
+                        padding-left: 5px;
+                        width: 65%;
+                        height: 30px;
+                        font-weight: 500;
+                        font-size: 17px;
+                        outline: none;
+                    }
+                }
             }
 
             .submit{
-                border: 1px solid red;
+                font-family: 'Poppins', sans-serif;
+                background: #3a8d3a;
+                color: white;
+                border: none;
+                padding: 10px 20px;
                 width: 100px;
                 margin-top: 50px;
+                font-weight: 500;
+                border-radius: 10px;
+
+                &:hover{
+                    cursor: pointer;
+                    background: #216321;
+                }
             }
         }
     }

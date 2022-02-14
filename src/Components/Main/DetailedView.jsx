@@ -15,7 +15,7 @@ ChartJS.register(
 	Legend
   );
 
-const currencyFormat = Intl.NumberFormat("en-US", {
+const currencyFormat = Intl.NumberFormat("en-IN", {
 	style: "currency",
 	currency: "INR"
 })
@@ -44,11 +44,8 @@ function View({showSellCoinForm, coin}){
 	const currentValue = qty * currentCoinPrice;
 	const gain = Math.round(currentValue-investedAmount, 2);
 	const gainPercent = Math.round((gain/investedAmount)*100, 2);
-	let pl;
-	if(gain < 0){pl = 'loss'}
-	else { pl = 'profit'; }
-	console.log(qty, currentCoinPrice, gain, gainPercent);
-
+	let pl; if(gain < 0){pl = 'loss'} else { pl = 'profit'; }
+	// const priceChange24hr = coin.market_data.
 	if(coin){
 		options = {
 			responsive: true,
@@ -69,21 +66,19 @@ function View({showSellCoinForm, coin}){
 			},
 		};
 		const USDtoINR = userCredentials.USDtoINR;
+
 		let d = new Date();
 		let labels = [];
 		for(let i=0 ; i<(24*7)-4 ; i++){
-			d.setHours(d.getHours() - 2);
 			labels.push(moment().subtract(i, 'h').format("Do ha"));
 		}
 		labels = labels.reverse()
-		console.log(labels)
-		// let labels = coin.market_data.sparkline_7d.price;
-		// labels = labels.map(label=>label*USDtoINR);
-		// labels = labels.map(label=>Math.round(label, 2));
 
 		let yData = coin.market_data.sparkline_7d.price;
 		yData = yData.map(data=>data*USDtoINR)
 		yData = yData.map(data=>Math.round(data, 2));
+
+		// TRY ADDING BITCOIN DATA
 
 		data = {
 			labels,
@@ -150,9 +145,24 @@ function View({showSellCoinForm, coin}){
 						</div>
 					</div>
 				</div>
-
-				<div className='extra-info'>
-
+				
+				<div className="extra-info">
+					<div className='block'>
+						<span className="text">Quantity Owned</span>
+						<span className='data'>{qty} {coin.symbol}</span>
+					</div>
+					<div className='block'>
+						<span className="text">Price Change 24hr</span>
+						<span className='data'>{coin.market_data.price_change_percentage_24h}%</span>
+					</div>
+					<div className='block'>
+						<span className="text">24hr High</span>
+						<span className='data'>{currencyFormat.format(coin.market_data.high_24h.inr)}</span>
+					</div>
+					<div className='block'>
+						<span className="text">24hr Low</span>
+						<span className='data'>{currencyFormat.format(coin.market_data.low_24h.inr)}</span>
+					</div>
 				</div>
 			</div>
 		</div>

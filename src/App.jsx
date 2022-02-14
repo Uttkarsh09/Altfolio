@@ -11,7 +11,6 @@ function App() {
 		<div>
 			<UserContext>
 				<BrowserRouter>
-					{console.log("here")}
 					<Routes>
 						<Route exact path="/signup" element={<Signup/>} />
 						<Route exact path="/login" element={<Login />} />

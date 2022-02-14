@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef} from 'react'
+import React, {useEffect, useRef} from 'react'
 import { useUserCredentials } from '../../Modules/Context/UserContext';
-import { updateCoinsOwned } from '../../Modules/Firebase/UpdateDocument';
+import { updateCoinsOwned, updateTotalInvestedAmount } from '../../Modules/Firebase/UpdateDocument';
 import {findCoinInfo} from "../../Modules/Utility/CoinListSearch";
 import AutoComplete from '../Utilities/AutoComplete';
 
@@ -13,15 +13,16 @@ function AddCoinForm({onCloseHandler}) {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const coin = coinRef.current.value;
+		const coinID = coinRef.current.value;
 		const qty = parseFloat(qtyRef.current.value);
 		const buyingPrice = parseFloat(bpRef.current.value);
-		console.log(coin, qty, buyingPrice);
+		const totalInvestedAmount = userCredentials.totalInvestedAmount + buyingPrice;
+		console.log(coinID, qty, buyingPrice);
 		
-		let coinExists = findCoinInfo({ coinList: userCredentials.coinList, coinID: coin });
+		let coinExists = findCoinInfo({ coinList: userCredentials.coinList, coinID: coinID });
 		if(!coinExists)
 		{
-			alert(`The coin with ID ${coin} does not exist`);
+			alert(`The coin with ID ${coinID} does not exist`);
 			return;
 		}
 
@@ -30,7 +31,7 @@ function AddCoinForm({onCloseHandler}) {
 
 		// If coinUpdated is false after this loop, means that the coin values weren't updated and a new coin was added
 		coinsOwned.every((coinOwned, idx) => {
-			if(coinOwned.id === coin){
+			if(coinOwned.id === coinID){
 				console.log("in it ")
 				const oldQty = parseFloat(coinOwned.qty);
 				const oldInvestedAmount = parseFloat(coinOwned.investedAmount);
@@ -45,7 +46,7 @@ function AddCoinForm({onCloseHandler}) {
 		// This means that a new coin is entered
 		if(!coinUpdated){
 			coinsOwned.push({
-				id: coin,
+				id: coinID,
 				name: coinExists.name,
 				symbol: coinExists.symbol,
 				qty: qty,
@@ -54,18 +55,20 @@ function AddCoinForm({onCloseHandler}) {
 		}
 
 		userCredentials.coinsOwned = coinsOwned
-		console.log("UPDATED COINS-OWNED")
-		console.log(userCredentials);
 
-		updateCoinsOwned({
-			coinsOwned: userCredentials.coinsOwned,
-			documentID: userCredentials.documentID
-		})
+		Promise.all([
+			updateCoinsOwned( userCredentials.coinsOwned, userCredentials.documentID),
+			updateTotalInvestedAmount(totalInvestedAmount, userCredentials.documentID)
+		])
 		.then((res)=>{
 			console.log("COINS-OWNED UPDATED");
 			onCloseHandler();
 			setUserCredentials((userCredentials)=>{
-				return {...userCredentials, coinsOwned:coinsOwned}
+				return {
+					...userCredentials, 
+					coinsOwned:coinsOwned, 
+					totalInvestedAmount: totalInvestedAmount
+				}
 			});	
 		}).catch(err=>{
 			console.log("ERROR WHILE UPDATING DOCS")
@@ -73,31 +76,40 @@ function AddCoinForm({onCloseHandler}) {
 		})
 	};
 
+	useEffect(()=>{
+		coinRef.current.focus();
+	}, [])
+
 	return (
-		<div className='add-coin-form'>
-			<div className='close-form' onClick={onCloseHandler}>X</div>
+		<div className='add-coin-form add'>
+			<img 
+				className='close-form' 
+				src="https://img.icons8.com/ios-filled/50/000000/delete-sign--v1.png" 
+				alt=""
+				onClick={onCloseHandler}
+			/>
 
 			<div className="title">
 				Add New Coin
 			</div>
 
 			<form onSubmit={handleSubmit}>
-				<div className='user-input'>
+				<div className='user-input add'>
 					{/* <AutoComplete getAutoCompleteData={getAutoCompleteData} /> */}
-					<div>
+					<div className='block'>
 						<label htmlFor="coin">Coin ID</label>
 						<input type="text" id="coin" ref={coinRef} />
 					</div>
-					<div>
+					<div className='block'>
 						<label htmlFor="qty">Qty</label>
 						<input type="number" id="qty" ref={qtyRef} step={0.00001} min={0.00001} />
 					</div>
-					<div>
+					<div className='block'>
 						<label htmlFor="bp">Buying Price</label>
 						<input type="number" id="bp" ref={bpRef} step={0.00001} min={0.00001} />
 					</div>
 				</div>
-				<input type="submit" className='submit' />
+				<input type="submit" className='submit add' />
 			</form>
 		</div>
 	)

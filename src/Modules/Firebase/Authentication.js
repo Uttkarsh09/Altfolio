@@ -10,10 +10,10 @@ async function createUser(email, password, displayName){
         const newUserData = {
             uid: user.uid,
             coinsOwned: [],
-            totalMoneyInvested: 0,
-            realizedGain: 0
+            totalInvestedAmount: 0,
+            realizedGain: 0,
         };
-        // console.log(user);
+        
         await updateUserProfile(displayName)
         await createUserDataDocument(newUserData);
         console.log("User created Completely");

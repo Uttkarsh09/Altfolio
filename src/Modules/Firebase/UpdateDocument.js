@@ -1,7 +1,6 @@
 import { db } from "./GetFirebaseInfo";
 import {addDoc, collection, doc, updateDoc} from "firebase/firestore";
 
-
 async function createUserDataDocument(data){
 	try{
 		const collectionRef = collection(db, "user-data");
@@ -12,11 +11,30 @@ async function createUserDataDocument(data){
 	}
 }
 
-function updateCoinsOwned({coinsOwned, documentID}){
+function updateCoinsOwned(coinsOwned, documentID){
 	const docRef = doc(db, "user-data", documentID);
 	return updateDoc(docRef, {
 		coinsOwned: coinsOwned
 	});
 }
 
-export { createUserDataDocument, updateCoinsOwned };
+function updateRealizedGain(amount, documentID){
+	const docRef = doc(db, "user-data", documentID);
+	return updateDoc(docRef, {
+		realizedGain: amount
+	});
+}
+
+function updateTotalInvestedAmount(amount, documentID){
+	const docRef = doc(db, "user-data", documentID);
+	return updateDoc(docRef, {
+		totalInvestedAmount: amount
+	});
+}
+
+export { 
+	createUserDataDocument, 
+	updateCoinsOwned, 
+	updateRealizedGain,
+	updateTotalInvestedAmount
+};

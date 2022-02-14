@@ -25,7 +25,6 @@ function Login() {
 	const navigate = useNavigate();
 
 	useEffect(()=>{
-		console.log("loginRendered");
 		const handleUserLogIn = () => {
 			const user = auth.currentUser;
 			if(user){
