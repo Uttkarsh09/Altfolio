@@ -7,6 +7,7 @@ import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {enableOnAuthStateChanged} from "../../Modules/Firebase/Authentication";
 import {getCoinList, fetchCoin} from "../../Modules/Coins/CoinInfo";
+import Input from "../Utilities/Input";
 
 function compare(a, b){
 	if(a.id < b.id){
@@ -72,14 +73,13 @@ function Login() {
 				<label htmlFor="email">Email</label>
 				<input type="text" id="email" ref={emailRef} />
 			</div>
-			<div className="user-inpu">
+			<div className="user-input">
 				<label htmlFor="password">Password</label>
 				<input type="password" id="password" ref={passwordRef} />
 			</div>
-			<div className='submit'>
-				<input type="submit" />
-				<Link to="/signup">Dont have an account?</Link>
-			</div>
+			<input type="submit" className='submit' />
+			<Link to="/signup" className='link'>Dont have an account?</Link>
+		
 		</form>
 		
 	</div>;

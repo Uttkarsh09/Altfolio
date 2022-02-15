@@ -76,14 +76,14 @@ function Signup() {
 				<label htmlFor="email">Email</label>
 				<input type="text" id="email" ref={emailRef} />
 			</div>
-			<div className="user-inpu">
+			<div className="user-input">
 				<label htmlFor="password">Password</label>
 				<input type="password" id="password" ref={passwordRef} />
 			</div>
-			<div className='submit'>
-				<input type="submit" />
-				<Link to="/login">Login</Link>
-			</div>
+			
+			<input type="submit" className='submit' />
+			<Link to="/login" className='link'>Login</Link>
+		
 		</form>
 	</div>;
 }

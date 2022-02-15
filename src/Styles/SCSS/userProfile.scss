@@ -1,0 +1,75 @@
+.user-profile-container{
+    border: 1px solid red;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+
+    .nav-bar{
+        border: 1px solid black;
+        border-radius: 10px;
+        max-width: 100vw;
+        height: min(7vh, 45px);
+        // height: 45px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 10px;
+        position: relative;
+
+        img{
+            margin-left: 10px;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .user-profile-icon{
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background-color: rgb(142, 200, 202);
+            margin-right: 10px;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        .logout{
+            padding: 7px 15px;
+            border-radius: 5px;
+            border: 1px solid black;
+            font-weight: 600;
+            background-color: white;
+            color: red;
+
+            &:hover{
+                border: 1px solid white;
+                background-color: red;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .user-area{
+        border: 1px solid purple;
+        height: 92vh;
+        
+        .username{
+            font-weight: 700;
+            font-size: 60px;
+            color: rgb(32, 32, 32);
+            border: 1px solid rgb(48, 48, 48);
+            padding-left: 30px;
+            letter-spacing: 2px;
+        }
+
+        .pie-chart{
+            // border: 1px solid red;
+            width: 400px;
+        }
+    }
+}

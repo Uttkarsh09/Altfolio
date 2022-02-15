@@ -1,0 +1,64 @@
+.fancy-input{
+    width: 100%;
+    position: relative;
+    height: 50px;
+    overflow: hidden;
+
+    // Override these for custom styling
+    --fancy-input-starting-font-size: 16px;
+    --fancy-input-ending-font-size: calc(var(--starting-font-size) - calc(var(--starting-font-size) * 0.3));
+    --fancy-input-font-size: 17px;
+    --fancy-input-font-color: rgb(231, 140, 65);
+    --fancy-input-font-family: $font-roboto;
+    --fancy-input-font-weight: 700;
+
+    input{
+        width: 100%;
+        height: 100%;
+        padding-top: 20px;
+        border: none;
+        outline: none;
+        font-family: var(--fancy-input-font-family);
+        font-size: var(--fancy-input-font-size);
+    }
+
+    label {
+        position: absolute;
+        bottom: 0px;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid black;
+
+        .content-name{
+        position: absolute;
+        bottom: 5px;
+        left: 0px;
+        transition: all 0.3s ease;
+        }
+    }
+    label::after{
+        content: "";
+        position: absolute;
+        left: 0px;
+        bottom: -1px;
+        height: 100%;
+        width: 100%;
+        border-bottom: 3px solid var(--fancy-input-font-color);
+        transition: transform 0.3s ease;
+        transform: translateX(-100%);
+    }
+}
+
+.fancy-input input:focus + .label-name .content-name,
+.fancy-input input:valid + .label-name .content-name{
+    transform: translateY(-150%);
+    font-size: var(--fancy-input-ending-font-size);
+    color: var(--fancy-input-font-color);
+}
+
+.fancy-input input:focus + label::after,
+.fancy-input input:valid + label::after{
+    transform: translateX(0);
+}
