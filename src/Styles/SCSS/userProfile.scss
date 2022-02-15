@@ -1,5 +1,4 @@
 .user-profile-container{
-    border: 1px solid red;
     height: 100vh;
     width: 100vw;
     position: relative;
@@ -18,13 +17,13 @@
         padding-right: 10px;
         position: relative;
 
-        img{
-            margin-left: 10px;
-
+        .back-arrow{
+            margin-left: 20px;
             &:hover{
                 cursor: pointer;
             }
         }
+
 
         .user-profile-icon{
             height: 35px;
@@ -34,6 +33,12 @@
             margin-right: 10px;
             &:hover{
                 cursor: pointer;
+            }
+
+            img{
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
             }
         }
 
@@ -55,21 +60,53 @@
     }
 
     .user-area{
-        border: 1px solid purple;
         height: 92vh;
+        position: relative;
+        padding-top: 20px;
         
         .username{
-            font-weight: 700;
-            font-size: 60px;
-            color: rgb(32, 32, 32);
-            border: 1px solid rgb(48, 48, 48);
-            padding-left: 30px;
-            letter-spacing: 2px;
+            // border: 1px solid red;
+
+            .text{
+
+                font-weight: 700;
+                font-size: 60px;
+                color: rgb(32, 32, 32);
+                margin-left: 30px;
+                letter-spacing: 2px;
+                background-color: rgb(248, 227, 227);
+                display: inline;
+                padding-left: 30px;
+                padding-right: 30px;
+                border-radius: 10px;
+            }
         }
 
-        .pie-chart{
-            // border: 1px solid red;
-            width: 400px;
+        .stats{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            border: 1px solid black;
+            
+            .pie-chart{
+                // border: 1px solid red;
+                width: 400px;
+            }
+
+            .text-stats{
+                .heading{
+                    font-size: 30px;
+                    font-weight: 500;
+                }
+                .stats-box{
+                    border-radius: 10px;
+                    background-color: rgb(243, 238, 235);
+                    width: 550px;
+                    height: 400px;
+                    display: flex;
+                        
+                }
+            }
         }
     }
 }

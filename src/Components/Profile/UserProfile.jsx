@@ -56,23 +56,36 @@ function UserProfile() {
 				<img 
 					src="https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/000000/external-left-arrow-kmg-design-glyph-kmg-design-1.png" 
 					alt="" 
+					className='back-arrow'
 					onClick={()=>{navigate("/home")}}
 				/>
 				<div style={{display: "flex"}}>
-					<div className='user-profile-icon' onClick={()=>navigate("/profile")}></div>
+					<div className='user-profile-icon' onClick={()=>navigate("/profile")}>
+						<img src="profile.svg" alt="" />
+					</div>
 					<button className='logout' onClick={()=>{logout()}}>Logout</button>
 				</div>
 			</div>
 
 			<div className="user-area">
-				<div className='username'>Uttkarsh</div>
-				
-				<div className='pie-chart'>
-					<Pie data={data} />
+				<div className='username'>
+					<div className='text'>
+						Uttkarsh
+					</div>
+				</div>
+
+				<div className="stats">
+					<div className='pie-chart'>
+						<Pie data={data} />
+					</div>
+					<div className="text-stats">
+						<div className='heading'>Statistics</div>
+						<div className='stats-box'>
+							
+						</div>
+					</div>
 				</div>
 			</div>
-
-			
 		</div>
 	)
 }

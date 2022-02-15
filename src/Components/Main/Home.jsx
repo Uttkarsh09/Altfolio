@@ -60,7 +60,9 @@ function Home() {
 
 	return <div className='home-container'>
 		<div className='nav-bar'>
-			<div className='user-profile-icon' onClick={()=>navigate("/profile")}></div>
+			<div className='user-profile-icon' onClick={()=>navigate("/profile")}>
+				<img src="profile.svg" alt="" />
+			</div>
 			<button className='logout' onClick={handleLogout}>Logout</button>
 		</div>
 

@@ -30,6 +30,12 @@
             &:hover{
                 cursor: pointer;
             }
+
+            img{
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
+            }
         }
 
         .logout{
@@ -261,7 +267,7 @@
         padding: 10px;
         display: flex;
         flex-direction: column;
-        background-color: rgb(158, 235, 158);
+        background-color: rgb(234, 235, 158);
 
         .close-form{
             position: absolute;
@@ -289,7 +295,7 @@
         }
 
         form{
-            background-color: rgb(194, 245, 194);
+            background-color: rgb(236, 245, 194);
             border-radius: 10px;
             height: 100%;
             padding: 10px 0px;
@@ -325,18 +331,18 @@
 
             .submit{
                 font-family: 'Poppins', sans-serif;
-                background: #3a8d3a;
-                color: white;
+                background: #dde02a;
                 border: none;
                 padding: 10px 20px;
                 width: 100px;
                 margin-top: 50px;
                 font-weight: 500;
                 border-radius: 10px;
-
+                
                 &:hover{
                     cursor: pointer;
-                    background: #216321;
+                    color: white;
+                    background: #babd2b;
                 }
             }
         }
