@@ -8,49 +8,54 @@
     position: relative;
     font-family: 'Poppins', sans-serif;
 
-    .nav-bar{
-        border: 1px solid black;
-        border-radius: 10px;
+    .nav-bar-container{
         max-width: 100vw;
-        height: min(7vh, 45px);
-        // height: 45px;
-        border-radius: 10px;
-        display: flex;
-        justify-content: right;
-        align-items: center;
-        padding-right: 10px;
-        position: relative;
+        padding: 2px;
+        box-sizing: border-box;
 
-        .user-profile-icon{
-            height: 35px;
-            width: 35px;
-            border-radius: 50%;
-            background-color: rgb(142, 200, 202);
-            margin-right: 10px;
-            &:hover{
-                cursor: pointer;
-            }
+        .nav-bar{
+            border: 2px solid #e08484;
+            background-color: #f3c5c5;
+            border-radius: 10px;
+            max-width: 100vw;
+            height: min(7vh, 45px);
+            // height: 45px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+            padding-right: 10px;
+            margin-bottom: 4px;
+            position: relative;
 
-            img{
+            .user-profile-icon{
                 height: 35px;
                 width: 35px;
                 border-radius: 50%;
+                background-color: rgb(142, 200, 202);
+                margin-right: 10px;
+                &:hover{
+                    cursor: pointer;
+                }
+                img{
+                    height: 35px;
+                    width: 35px;
+                    border-radius: 50%;
+                }
             }
-        }
 
-        .logout{
-            padding: 7px 15px;
-            border-radius: 5px;
-            border: 1px solid black;
-            font-weight: 600;
-            background-color: white;
-            color: red;
-
-            &:hover{
-                border: 1px solid white;
-                background-color: red;
-                color: white;
-                cursor: pointer;
+            .logout{
+                padding: 7px 15px;
+                border-radius: 5px;
+                border: none;
+                font-weight: 600;
+                background-color: white;
+                color: red;
+                &:hover{
+                    background-color: red;
+                    color: white;
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -64,7 +69,8 @@
         // max-height: 92vh;
 
         .coin-list-container{
-            border: 1px solid rgb(81, 81, 236);
+            border: 2px solid #e09191;
+            // background-color: #eee0e0;
             border-radius: 10px;
             width: 40%;
             padding: 5px;
@@ -79,6 +85,7 @@
                 }
 
                 .coin-card{
+                    background-color: white;
                     border: 2px solid black;
                     margin-bottom: 5px;
                     height: 70px;
@@ -143,7 +150,10 @@
         }
 
         .detailed-view{
-            border: 1px solid black;
+            // border: 1px solid black;
+            border-bottom: 2px solid #e09191;
+            margin-right: 5px;
+            margin-left: 5px;
             border-radius: 10px;
             width: 100%;   // This is 100 as it will take rest of the remaining space, if giving error convert to 70%
             overflow-y: scroll;
@@ -168,8 +178,12 @@
                     background-color: rgb(189, 1, 1);
                 }
             }
+            
+            // .chart{ margin: 10px; }
+
             .info{
-                border: 1px solid black;
+                border: 2px solid #e09191;
+                // background-color: #eee0e0;
                 border-radius: 10px;
                 position: relative;
                 

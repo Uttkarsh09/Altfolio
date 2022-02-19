@@ -59,13 +59,14 @@ function Home() {
     }, [userCredentials])
 
 	return <div className='home-container'>
-		<div className='nav-bar'>
-			<div className='user-profile-icon' onClick={()=>navigate("/profile")}>
-				<img src="profile.svg" alt="" />
+		<div className="nav-bar-container">
+			<div className='nav-bar'>
+				<div className='user-profile-icon' onClick={()=>navigate("/profile")}>
+					<img src="profile.svg" alt="" />
+				</div>
+				<button className='logout' onClick={handleLogout}>Logout</button>
 			</div>
-			<button className='logout' onClick={handleLogout}>Logout</button>
 		</div>
-
 		<div className='info-container'>
 			<CoinList 
 				isLoading={isLoading} 

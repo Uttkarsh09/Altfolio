@@ -92,12 +92,12 @@ function View({showSellCoinForm, coin}){
 	}
 
 	return(<>
-			<button 
-				className="sell-btn" 
-				onClick={()=>{showSellCoinForm(coin.id)}}
-			>
-				SELL
-			</button>
+		<button 
+			className="sell-btn" 
+			onClick={()=>{showSellCoinForm(coin.id)}}
+		>
+			SELL
+		</button>
 		<div className='chart'>
 			<Line options={options} data={data} />
 		</div> 
