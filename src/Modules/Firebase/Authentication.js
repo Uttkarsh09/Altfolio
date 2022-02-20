@@ -1,5 +1,5 @@
 import { auth } from "./GetFirebaseInfo";
-import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getAuth, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, getAuth, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { createUserDataDocument } from "./UpdateDocument";
 
 async function createUser(email, password, displayName){
@@ -43,8 +43,17 @@ function enableOnAuthStateChanged(handleUserSignedIn){
             console.log("user not found (onAuthStateChanged)");
         }
     })
-
     return unsubscribe;
+}
+
+function loginUser(email, password){
+    signInWithEmailAndPassword(auth, email, password)
+    .catch((err)=>{
+        console.log("There was an error while logging in ");
+        const errorCode = err.code;
+        const errorMessage = err.message;
+        console.log(errorCode, errorMessage);
+    })
 }
 
 function logout(){
@@ -52,4 +61,4 @@ function logout(){
     return signOut(auth)
 }
 
-export {createUser, updateUserProfile, enableOnAuthStateChanged, logout};
+export {createUser, updateUserProfile, enableOnAuthStateChanged, logout, loginUser};
