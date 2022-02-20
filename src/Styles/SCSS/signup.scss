@@ -5,16 +5,30 @@
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+
+    img{
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .project-title{
+        font-size: 50px;
+        // font-weight: 500;
+        margin-bottom: 40px;
+        font-family: 'Caveat Brush', cursive;
+    }  
 
     .signup-form{
         border-radius: 10px;
-        border: 2px solid black;
+        // border: 2px solid black;
+        background-color: rgb(228, 99, 99, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        padding: 40px 60px;
-        
+        padding: 30px 60px;
+
         .user-input{
             display: flex;
             margin-top: 10px;
