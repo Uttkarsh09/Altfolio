@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useLayoutEffect } from 'react';
 import "../../Styles/CSS/userProfile.css";
 import {useNavigate} from "react-router-dom";
 import { getCoinsInfo } from '../../Modules/Coins/CoinInfo';
@@ -45,6 +45,10 @@ function UserProfile() {
 			navigate("/login");
 		})
 	}
+
+	useLayoutEffect(()=>{
+		document.title = "Altfolio | User Profile";
+	});
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const coinsOwnedMemo = useMemo(()=> userCredentials.coinsOwned, []);

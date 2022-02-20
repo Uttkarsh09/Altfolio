@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import CoinList from './CoinList';
 import DetailedView from './DetailedView';
@@ -29,6 +29,10 @@ function Home() {
 	const showSellCoinForm = (coinID) => { setShowAddForm(false); setShowSellForm(coinID); }
 	const hideAddNewCoinForm = () => { setShowAddForm(false); }
 	const hideSellCoinForm = () => {setShowSellForm(false)}
+
+	useLayoutEffect(()=>{
+		document.title = "Altfolio | Home";
+	});
 
 	const updateCoinToShowInDetailedView = (coinID) => {
 		coinInfo.every((coin, idx)=>{

@@ -17,6 +17,7 @@ async function getCoinsInfo(coins){
         console.log(`FETCHING ${coin.id}`);
         promiseArray.push(fetchCoin(coin.id));
     })
+    
     return Promise.all(promiseArray)
     .then(resolvedPromises=>{
         const allData = [];

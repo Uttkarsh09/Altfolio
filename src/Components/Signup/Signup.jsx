@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useLayoutEffect} from 'react';
 import {createUser} from "../../Modules/Firebase/Authentication";
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/signup.css";
@@ -29,6 +29,10 @@ function Signup() {
 	useEffect(()=>{
 		console.log("signup Rendered");
 	}, [])
+
+	useLayoutEffect(()=>{
+		document.title = "Altfolio | Signup";
+	});
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
@@ -67,6 +71,10 @@ function Signup() {
 	}
 
 	return <div className='signup-container'>
+		<img src="bitcoin-wallet.png" alt="Logo" />
+		<div className='project-title'>
+			ALTFOLIO		
+		</div>
 		<form onSubmit={onSubmit} className='signup-form'>
 			<div className='user-input'>
 				<label htmlFor="username">Username</label>
@@ -82,7 +90,7 @@ function Signup() {
 			</div>
 			
 			<input type="submit" className='submit' />
-			<Link to="/login" className='link'>Login</Link>
+			<Link to="/login" className='link'>Already have an account ?</Link>
 		
 		</form>
 	</div>;

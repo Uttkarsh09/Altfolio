@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useLayoutEffect} from 'react';
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/login.css";
 import {Link, useNavigate} from "react-router-dom";
@@ -24,6 +24,10 @@ function Login() {
 	const passwordRef = useRef();
 	const [_, setUserCredentials] = useUserCredentials();
 	const navigate = useNavigate();
+
+	useLayoutEffect(()=>{
+		document.title = "Altfolio | Login";
+	});
 
 	useEffect(()=>{
 		const handleUserLogIn = () => {
@@ -56,7 +60,6 @@ function Login() {
 			// console.log("Unsubscribing");
 			unsubscribe()
 		};
-
 	}, [setUserCredentials, navigate]);
 
 	const onSubmit = (event) => {
@@ -65,11 +68,14 @@ function Login() {
 		const password = passwordRef.current.value;
 		console.log(email, password);
 		console.log("logging  user"); 
-	
 		loginUser(email, password);
 	}
 
 	return <div className="login-container">
+		<img src="bitcoin-wallet.png" alt="Logo" />
+		<div className='project-title'>
+			ALTFOLIO		
+		</div>
 		<form onSubmit={onSubmit} className='login-form'>
 			<div className='user-input'>
 				<label htmlFor="email">Email</label>
@@ -80,7 +86,7 @@ function Login() {
 				<input type="password" id="password" ref={passwordRef} />
 			</div>
 			<input type="submit" className='submit' />
-			<Link to="/signup" className='link'>Dont have an account?</Link>
+			<Link to="/signup" className='link'>Dont have an account ?</Link>
 		</form>
 	</div>;
 }
