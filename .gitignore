@@ -2,7 +2,6 @@
 
 # Custom Files to ignore
 .env
-fbConfig.js
 /src/Styles/CSS
 
 # dependencies
