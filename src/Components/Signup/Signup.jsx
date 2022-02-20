@@ -28,10 +28,6 @@ function Signup() {
 	const [isSigningIn, setIsSigningIn] = useState(false);
 	const navigate = useNavigate();
 
-	useEffect(()=>{
-		console.log("signup Rendered");
-	}, [])
-
 	useLayoutEffect(()=>{
 		document.title = "Altfolio | Signup";
 	});
@@ -41,12 +37,14 @@ function Signup() {
 		setIsSigningIn(true);
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
+		const username = usernameRef.current.value;
 
 		console.log("Creating user"); 
-		const userCreated = await createUser(email, password);
+		const userCreated = await createUser(email, password, username);
 		if( userCreated ){
 			console.log("User creation process completed")
 			const user = auth.currentUser;
+			console.log(user);
 			if(user){
 				getUserData(user.uid)
 				.then(userData=>{
@@ -83,15 +81,15 @@ function Signup() {
 		<form onSubmit={onSubmit} className='signup-form'>
 			<div className='user-input'>
 				<label htmlFor="username">Username</label>
-				<input type="text" id="username" ref={usernameRef} />
+				<input type="text" id="username" ref={usernameRef} required/>
 			</div>
 			<div className='user-input'>
 				<label htmlFor="email">Email</label>
-				<input type="text" id="email" ref={emailRef} />
+				<input type="text" id="email" ref={emailRef} required/>
 			</div>
 			<div className="user-input">
 				<label htmlFor="password">Password</label>
-				<input type="password" id="password" ref={passwordRef} />
+				<input type="password" id="password" ref={passwordRef} required/>
 			</div>
 			
 			<input type="submit" className='submit' />

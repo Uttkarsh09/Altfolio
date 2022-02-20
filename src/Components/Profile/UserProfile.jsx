@@ -3,9 +3,11 @@ import "../../Styles/CSS/userProfile.css";
 import {useNavigate} from "react-router-dom";
 import { getCoinsInfo } from '../../Modules/Coins/CoinInfo';
 import { logout } from '../../Modules/Firebase/Authentication';
+import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale,	BarElement,	Title } from 'chart.js';
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 import { Pie, Bar } from 'react-chartjs-2';
+
 ChartJS.register(
 	ArcElement, 
 	Tooltip, 
@@ -20,6 +22,7 @@ function UserProfile() {
 	const navigate = useNavigate();
 	const [userCredentials, setUserCredentials] = useUserCredentials();
 	const [coinsInfo, setCoinInfo] = useState(false);
+	const username = auth.currentUser.displayName;
 	let values = [];
 	let pieChartlabels = [];
 	let pieChartData = {};
@@ -149,7 +152,7 @@ function UserProfile() {
 			<div className="user-area">
 				<div className='username'>
 					<div className='text'>
-						Uttkarsh
+						{username}
 					</div>
 				</div>
 

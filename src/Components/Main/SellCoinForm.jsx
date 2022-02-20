@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {useRef, useEffect} from 'react';
 import { useUserCredentials } from '../../Modules/Context/UserContext';
-import { createUserDataDocument, updateCoinsOwned, updateRealizedGain, updateTotalInvestedAmount } from '../../Modules/Firebase/UpdateDocument';
+import { updateCoinsOwned, updateRealizedGain, updateTotalInvestedAmount } from '../../Modules/Firebase/UpdateDocument';
 import { findCoinInfo } from '../../Modules/Utility/CoinListSearch';
 
 function SellCoinForm({onCloseHandler, coinID}) {
