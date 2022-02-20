@@ -40,6 +40,12 @@ function UserProfile() {
 	  };
 	let barGraphlabels = ["Invested", "Current Value"];
 
+	const handleLogout = () => {
+		logout().then(()=>{
+			navigate("/login");
+		})
+	}
+
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const coinsOwnedMemo = useMemo(()=> userCredentials.coinsOwned, []);
 	useEffect(()=>{
@@ -131,7 +137,7 @@ function UserProfile() {
 						<div className='user-profile-icon' onClick={()=>navigate("/profile")}>
 							<img src="profile.svg" alt="" />
 						</div>
-						<button className='logout' onClick={()=>{logout()}}>Logout</button>
+						<button className='logout' onClick={handleLogout}>Logout</button>
 					</div>
 				</div>
 			</div>
@@ -147,9 +153,9 @@ function UserProfile() {
 					<div className='pie-chart'>
 						<Pie data={pieChartData} />
 					</div>
-					<div className='bar-graph'>
+					{/* <div className='bar-graph'>
 						<Bar options={barGraphOptions} data={barGraphData} />	
-					</div>
+					</div> */}
 					<div className="text-stats">
 						<div className='heading'>Statistics</div>
 						<div className='stats-box'>
