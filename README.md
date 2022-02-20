@@ -14,6 +14,7 @@ This is a simple crypto currency portfolio management site made using react and 
 Things to keep in mind:
 <ul>
   <li>Exchange rates are based on USDT</li>
+  <li>This is still nowhere near read, manythings things are pending and some are janky</li>
   <li>In order to contribute please transpile the SCSS first
     <ul>
       <li>Transpile once - `yarn/npm run transpileSCSS`</li>
