@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect, useLayoutEffect} from 'react';
+import React, {useRef, useEffect, useLayoutEffect, useState} from 'react';
 import {createUser} from "../../Modules/Firebase/Authentication";
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/signup.css";
@@ -8,6 +8,7 @@ import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {useNavigate} from "react-router-dom";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {getCoinList, fetchCoin} from "../../Modules/Coins/CoinInfo";
+import Loading from '../Utilities/Loading';
 
 function compare(a, b){
 	if(a.id < b.id){
@@ -24,6 +25,7 @@ function Signup() {
 	const passwordRef = useRef();
 	const usernameRef = useRef();
 	const [_, setUserCredentials] = useUserCredentials();
+	const [isSigningIn, setIsSigningIn] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(()=>{
@@ -36,6 +38,7 @@ function Signup() {
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
+		setIsSigningIn(true);
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
 
@@ -55,6 +58,7 @@ function Signup() {
 							coinData.json().then(coinData=>{
 								console.log({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
 								setUserCredentials({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
+								setIsSigningIn(false);
 								navigate("/home");
 							})
 						})
@@ -65,12 +69,13 @@ function Signup() {
 					})
 				})
 			}
-			setUserCredentials(userCreated);
-			navigate("/home");
+			// setUserCredentials(userCreated);
+			// navigate("/home");
 		}
 	}
 
 	return <div className='signup-container'>
+		{ isSigningIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> }
 		<img src="bitcoin-wallet.png" alt="Logo" />
 		<div className='project-title'>
 			ALTFOLIO		

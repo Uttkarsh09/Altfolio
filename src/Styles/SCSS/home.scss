@@ -4,7 +4,6 @@
 .home-container{
     // border: 1px solid red;
     width: 100vw;
-    height: 100vh;
     position: relative;
     font-family: 'Poppins', sans-serif;
 
@@ -69,12 +68,11 @@
         // max-height: 92vh;
 
         .coin-list-container{
+            position: relative;
             border: 2px solid #e09191;
-            // background-color: #eee0e0;
             border-radius: 10px;
             width: 40%;
             padding: 5px;
-            position: relative;
             
             .coin-list{
                 // border: 1px solid red;

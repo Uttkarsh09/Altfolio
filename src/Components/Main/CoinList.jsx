@@ -1,31 +1,34 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import Loading from "./Loading";
+import Loading from "../Utilities/Loading";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 
 function CoinList({isLoading, coinInfo, onAddCoinHandler, updateCoinToShowInDetailedView}){
     const [userCredentials, setUserCredentials] = useUserCredentials();
-
+    console.log("IN COIN LIST")
+    console.log(isLoading);
 	return <div className="coin-list-container">
-		{
-			// isLoading ? <Loading /> :
-			<div className="coin-list">
-				{
-                    coinInfo.map(coin => {
-                        return (
-                            <CoinCard 
-                                coin={coin} 
-                                key={coin.name} 
-                                updateCoinToShowInDetailedView={updateCoinToShowInDetailedView}
-                            />
-                        )
-                    })
-                }
-			</div>
-		}
-        <div className="add-coin-btn" onClick={onAddCoinHandler}>
-            +
-        </div>
+        {
+            // isLoading ? <Loading type="spin" color="#000"/> :
+            <>
+                <div className="coin-list">
+                    {
+                        coinInfo.map(coin => {
+                            return (
+                                <CoinCard 
+                                    coin={coin} 
+                                    key={coin.name} 
+                                    updateCoinToShowInDetailedView={updateCoinToShowInDetailedView}
+                                />
+                            )
+                        })
+                    }
+                </div>
+                <div className="add-coin-btn" onClick={onAddCoinHandler}>
+                    +
+                </div>
+            </>
+        }
 	</div>
 }
 

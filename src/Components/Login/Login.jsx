@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect, useLayoutEffect} from 'react';
+import React, {useRef, useEffect, useLayoutEffect, useState} from 'react';
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/login.css";
+import Loading from '../Utilities/Loading';
 import {Link, useNavigate} from "react-router-dom";
 import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
@@ -22,6 +23,7 @@ function compare(a, b){
 function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const [isLogggingIn, setIsLoggingIn] = useState(false);
 	const [_, setUserCredentials] = useUserCredentials();
 	const navigate = useNavigate();
 
@@ -31,6 +33,7 @@ function Login() {
 
 	useEffect(()=>{
 		const handleUserLogIn = () => {
+			setIsLoggingIn(true);
 			const user = auth.currentUser;
 			if(user){
 				getUserData(user.uid)
@@ -43,6 +46,7 @@ function Login() {
 							coinData.json().then(coinData=>{
 								console.log({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
 								setUserCredentials({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
+								setIsLoggingIn(false);
 								navigate("/home");
 							})
 						})
@@ -64,31 +68,36 @@ function Login() {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
+		setIsLoggingIn(true);
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
 		console.log(email, password);
 		console.log("logging  user"); 
 		loginUser(email, password);
+		setIsLoggingIn(false);
 	}
 
-	return <div className="login-container">
-		<img src="bitcoin-wallet.png" alt="Logo" />
-		<div className='project-title'>
-			ALTFOLIO		
+	return (
+		<div className="login-container">
+			{ isLogggingIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> }
+			<img src="bitcoin-wallet.png" alt="Logo" />
+			<div className='project-title'>
+				ALTFOLIO		
+			</div>
+			<form onSubmit={onSubmit} className='login-form'>
+				<div className='user-input'>
+					<label htmlFor="email">Email</label>
+					<input type="text" id="email" ref={emailRef} />
+				</div>
+				<div className="user-input">
+					<label htmlFor="password">Password</label>
+					<input type="password" id="password" ref={passwordRef} />
+				</div>
+				<input type="submit" className='submit' />
+				<Link to="/signup" className='link'>Dont have an account ?</Link>
+			</form>
 		</div>
-		<form onSubmit={onSubmit} className='login-form'>
-			<div className='user-input'>
-				<label htmlFor="email">Email</label>
-				<input type="text" id="email" ref={emailRef} />
-			</div>
-			<div className="user-input">
-				<label htmlFor="password">Password</label>
-				<input type="password" id="password" ref={passwordRef} />
-			</div>
-			<input type="submit" className='submit' />
-			<Link to="/signup" className='link'>Dont have an account ?</Link>
-		</form>
-	</div>;
+	)
 }
 
 export default Login;

@@ -14,13 +14,14 @@ const tempUserCredentialsStructure = {
     "coinsOwned": [],
 	"coinInfo": [],
     "uid": "6wBQzAw3PtZHL6ScscPHjuDnEcv1",
-	"totalMoneyInvested": 0
+	"totalMoneyInvested": 0,
+	"name": "",
 };
 
 function Home() {
 	const navigate = useNavigate();
     const [userCredentials, _] = useUserCredentials();
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [coinInfo, setCoinInfo] = useState([]);
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [showSellForm, setShowSellForm] = useState(false);
@@ -54,6 +55,7 @@ function Home() {
         getCoinsInfo(userCredentials.coinsOwned)
 		.then(detailedCoinsInfo=>{
 			console.log(detailedCoinsInfo);
+			setIsLoading(false)
             setCoinInfo(()=>detailedCoinsInfo)
         })
 		.catch(err=>{
@@ -72,12 +74,14 @@ function Home() {
 			</div>
 		</div>
 		<div className='info-container'>
+			{/* ~~~~~~~~~~~~~~~~~~ COIN LIST ~~~~~~~~~~~~~~~~~~ */}
 			<CoinList 
 				isLoading={isLoading} 
 				coinInfo={coinInfo} 
 				onAddCoinHandler={showAddNewCoinForm}
 				updateCoinToShowInDetailedView={updateCoinToShowInDetailedView}
 			/>
+			{/* ~~~~~~~~~~~~~~~~~~ DETAILED VIEW ~~~~~~~~~~~~~~~~~~ */}
 			<DetailedView showSellCoinForm={showSellCoinForm} coin={coinToShowInDetailedView} />
 		</div>
 
