@@ -2,7 +2,7 @@
 
 # Custom Files to ignore
 .env
-/src/Styles/CSS
+# /src/Styles/CSS
 
 # dependencies
 /node_modules

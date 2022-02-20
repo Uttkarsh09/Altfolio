@@ -1,0 +1,65 @@
+.signup-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  flex-direction: column;
+}
+.signup-container img {
+  height: 100px;
+  margin-bottom: 10px;
+}
+.signup-container .project-title {
+  font-size: 50px;
+  margin-bottom: 40px;
+  font-family: "Caveat Brush", cursive;
+}
+.signup-container .signup-form {
+  border-radius: 10px;
+  background-color: rgba(228, 99, 99, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px 60px;
+}
+.signup-container .signup-form .user-input {
+  display: flex;
+  margin-top: 10px;
+}
+.signup-container .signup-form .user-input label {
+  display: inline-block;
+  width: 120px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.signup-container .signup-form .user-input input {
+  width: 250px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 17px;
+  padding-left: 10px;
+  outline: none;
+}
+.signup-container .signup-form .submit {
+  padding: 10px 20px;
+  margin-top: 40px;
+  border: none;
+  background-color: #f8a01d;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.signup-container .signup-form .submit:hover {
+  background-color: #aa6f16;
+  cursor: pointer;
+  color: white;
+}
+.signup-container .signup-form .link {
+  margin-top: 20px;
+}
+
+/*# sourceMappingURL=signup.css.map */

@@ -1,0 +1,64 @@
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  flex-direction: column;
+}
+.login-container img {
+  height: 100px;
+  margin-bottom: 10px;
+}
+.login-container .project-title {
+  font-size: 50px;
+  margin-bottom: 40px;
+  font-family: "Caveat Brush", cursive;
+}
+.login-container .login-form {
+  border-radius: 10px;
+  background-color: rgba(228, 99, 99, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px 60px;
+}
+.login-container .login-form .user-input {
+  display: flex;
+  margin-top: 10px;
+}
+.login-container .login-form .user-input label {
+  display: inline-block;
+  width: 120px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.login-container .login-form .user-input input {
+  width: 250px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 17px;
+  padding-left: 10px;
+  outline: none;
+}
+.login-container .login-form .submit {
+  padding: 10px 20px;
+  margin-top: 40px;
+  border: none;
+  background-color: #f8a01d;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.login-container .login-form .submit:hover {
+  background-color: #aa6f16;
+  cursor: pointer;
+  color: white;
+}
+.login-container .login-form .link {
+  margin-top: 20px;
+}
+
+/*# sourceMappingURL=login.css.map */

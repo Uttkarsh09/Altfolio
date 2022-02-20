@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Charm&family=Poppins:wght@400;500;600;700;800;900&family=Rancho&display=swap");
+.home-container {
+  width: 100vw;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+.home-container .nav-bar-container {
+  max-width: 100vw;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.home-container .nav-bar-container .nav-bar {
+  border: 2px solid #e08484;
+  border-radius: 10px;
+  background-color: #f3c5c5;
+  border-radius: 10px;
+  max-width: 100vw;
+  height: min(7vh, 45px);
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding-right: 10px;
+  margin-bottom: 4px;
+  position: relative;
+}
+.home-container .nav-bar-container .nav-bar .user-profile-icon {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #8ec8ca;
+  margin-right: 10px;
+}
+.home-container .nav-bar-container .nav-bar .user-profile-icon:hover {
+  cursor: pointer;
+}
+.home-container .nav-bar-container .nav-bar .user-profile-icon img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+.home-container .nav-bar-container .nav-bar .logout {
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  background-color: white;
+  color: red;
+}
+.home-container .nav-bar-container .nav-bar .logout:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+.home-container .info-container {
+  max-width: 100vw;
+  height: 92vh;
+  display: flex;
+  position: relative;
+}
+.home-container .info-container .coin-list-container {
+  position: relative;
+  border: 2px solid #e09191;
+  border-radius: 10px;
+  width: 40%;
+  padding: 5px;
+}
+.home-container .info-container .coin-list-container .coin-list {
+  height: 90%;
+  overflow-y: scroll;
+}
+.home-container .info-container .coin-list-container .coin-list::-webkit-scrollbar {
+  display: none;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card {
+  background-color: white;
+  border: 2px solid black;
+  margin-bottom: 5px;
+  height: 70px;
+  border-radius: 10px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Poppins", sans-serif;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card:hover {
+  cursor: pointer;
+  background: #d1d1d1;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card .title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card .title .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card .title .name {
+  font-size: 25px;
+  margin-left: 10px;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card .title .currency {
+  color: dimgray;
+  font-size: 12px;
+}
+.home-container .info-container .coin-list-container .coin-list .coin-card .price {
+  font-weight: 600;
+  font-size: 19px;
+}
+.home-container .info-container .coin-list-container .add-coin-btn {
+  position: absolute;
+  bottom: 5px;
+  border: 2px solid black;
+  width: 97%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  border-radius: 10px;
+  z-index: 100;
+  background-color: white;
+}
+.home-container .info-container .coin-list-container .add-coin-btn:hover {
+  cursor: pointer;
+  background: #aaaaaa;
+}
+.home-container .info-container .detailed-view {
+  border-bottom: 2px solid #e09191;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+  width: 100%;
+  overflow-y: scroll;
+  position: relative;
+}
+.home-container .info-container .detailed-view::-webkit-scrollbar {
+  display: none;
+}
+.home-container .info-container .detailed-view .sell-btn {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff3b3b;
+  font-weight: 600;
+  color: white;
+  border-radius: 10px;
+}
+.home-container .info-container .detailed-view .sell-btn:hover {
+  cursor: pointer;
+  background-color: #bd0101;
+}
+.home-container .info-container .detailed-view .info {
+  border: 2px solid #e09191;
+  border-radius: 10px;
+  position: relative;
+}
+.home-container .info-container .detailed-view .info .stats {
+  padding: 10px;
+}
+.home-container .info-container .detailed-view .info .stats .title {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  align-items: center;
+}
+.home-container .info-container .detailed-view .info .stats .title .name-exchg {
+  display: flex;
+  align-items: center;
+}
+.home-container .info-container .detailed-view .info .stats .title .name-exchg .icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.home-container .info-container .detailed-view .info .stats .title .name-exchg .name {
+  font-size: 40px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+.home-container .info-container .detailed-view .info .stats .title .name-exchg .exchange {
+  color: #696969;
+  font-weight: 600;
+}
+.home-container .info-container .detailed-view .info .stats .title .price {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 40px;
+  color: #3a3a3a;
+  padding-right: 20px;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain {
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain .gain-data {
+  margin-right: 30px;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain, .home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain-percent {
+  margin-top: 10px;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain .profit, .home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain-percent .profit {
+  color: green;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain .loss, .home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain-percent .loss {
+  color: red;
+}
+.home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain .text, .home-container .info-container .detailed-view .info .stats .user-gain .gain-data .gain-percent .text {
+  display: inline-block;
+  width: 190px;
+}
+.home-container .info-container .detailed-view .info .stats .extra-info {
+  margin-top: 15px;
+}
+.home-container .info-container .detailed-view .info .stats .extra-info .block {
+  font-size: 16px;
+  margin-top: 9px;
+}
+.home-container .info-container .detailed-view .info .stats .extra-info .block .text {
+  width: 190px;
+  font-weight: 500;
+  display: inline-block;
+}
+.home-container .info-container .detailed-view .info .stats .extra-info .block .data {
+  color: #3f3f3f;
+}
+.home-container .add-coin-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  height: 300px;
+  width: 500px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #eaeb9e;
+}
+.home-container .add-coin-form .close-form {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: 800;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.home-container .add-coin-form .close-form:hover {
+  cursor: pointer;
+}
+.home-container .add-coin-form .title {
+  font-weight: 500;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+.home-container .add-coin-form form {
+  background-color: #ecf5c2;
+  border-radius: 10px;
+  height: 100%;
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 20px;
+}
+.home-container .add-coin-form form .user-input {
+  width: 100%;
+}
+.home-container .add-coin-form form .user-input .block {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.home-container .add-coin-form form .user-input .block label {
+  display: inline-block;
+  width: 35%;
+}
+.home-container .add-coin-form form .user-input .block input {
+  padding-left: 5px;
+  width: 65%;
+  height: 30px;
+  font-weight: 500;
+  font-size: 17px;
+  outline: none;
+}
+.home-container .add-coin-form form .submit {
+  font-family: "Poppins", sans-serif;
+  background: #dde02a;
+  border: none;
+  padding: 10px 20px;
+  width: 100px;
+  margin-top: 50px;
+  font-weight: 500;
+  border-radius: 10px;
+}
+.home-container .add-coin-form form .submit:hover {
+  cursor: pointer;
+  color: white;
+  background: #babd2b;
+}
+
+/*# sourceMappingURL=home.css.map */

@@ -1,0 +1,110 @@
+.user-profile-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+.user-profile-container .nav-bar-container {
+  max-width: 100vw;
+  padding: 2px;
+  box-sizing: border-box;
+}
+.user-profile-container .nav-bar-container .nav-bar {
+  border: 2px solid #e08484;
+  background-color: #f3c5c5;
+  border-radius: 10px;
+  height: min(7vh, 45px);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  position: relative;
+}
+.user-profile-container .nav-bar-container .nav-bar .back-arrow {
+  margin-left: 20px;
+}
+.user-profile-container .nav-bar-container .nav-bar .back-arrow:hover {
+  cursor: pointer;
+}
+.user-profile-container .nav-bar-container .nav-bar .user-profile-icon {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #8ec8ca;
+  margin-right: 10px;
+}
+.user-profile-container .nav-bar-container .nav-bar .user-profile-icon:hover {
+  cursor: pointer;
+}
+.user-profile-container .nav-bar-container .nav-bar .user-profile-icon img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+.user-profile-container .nav-bar-container .nav-bar .logout {
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  background-color: white;
+  color: red;
+}
+.user-profile-container .nav-bar-container .nav-bar .logout:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+.user-profile-container .user-area {
+  height: 92vh;
+  position: relative;
+  padding-top: 20px;
+}
+.user-profile-container .user-area .username .text {
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 60px;
+  color: #202020;
+  letter-spacing: 2px;
+  background-color: #f8e3e3;
+  border: 3px solid #ecc6c6;
+  display: inline;
+  margin-left: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.user-profile-container .user-area .stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.user-profile-container .user-area .stats .pie-chart {
+  width: 400px;
+}
+.user-profile-container .user-area .stats .text-stats .heading {
+  font-size: 30px;
+  font-weight: 500;
+}
+.user-profile-container .user-area .stats .text-stats .stats-box {
+  border-radius: 10px;
+  background-color: #f5e4e4;
+  border: 3px solid #ecc6c6;
+  width: 470px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.user-profile-container .user-area .stats .text-stats .stats-box .stat {
+  margin-bottom: 20px;
+}
+.user-profile-container .user-area .stats .text-stats .stats-box .stat .property-name {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+}
+.user-profile-container .user-area .stats .text-stats .stats-box .stat .value {
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=userProfile.css.map */
