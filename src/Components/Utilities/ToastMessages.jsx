@@ -18,7 +18,7 @@ const errorCodes = {
     "auth/invalid-password": "Invalid password 🥸",
     "auth/weak-password": "Weak password - password should be at least 6 characters 💪",
     "auth/user-not-found": "User not found with the provided credentials 🤕",
-    // "":"",
+    "auth/email-already-in-use":"This email is already in use, try another 🧐",
 }
 
 function getErrorMessage(errCode) {
