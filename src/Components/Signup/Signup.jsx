@@ -9,6 +9,8 @@ import {useNavigate} from "react-router-dom";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {getCoinList, fetchCoin} from "../../Modules/Coins/CoinInfo";
 import Loading from '../Utilities/Loading';
+import { toast, getErrorMessage, resolveToast } from '../Utilities/ToastMessages';
+import useUpdateTitle from '../Utilities/UpdateTitle';
 
 function compare(a, b){
 	if(a.id < b.id){
@@ -25,55 +27,61 @@ function Signup() {
 	const passwordRef = useRef();
 	const usernameRef = useRef();
 	const [_, setUserCredentials] = useUserCredentials();
-	const [isSigningIn, setIsSigningIn] = useState(false);
 	const navigate = useNavigate();
 
-	useLayoutEffect(()=>{
-		document.title = "Altfolio | Signup";
-	});
+	useUpdateTitle("Altfolio | Signup");
 
 	const onSubmit = async (event) => {
 		event.preventDefault();
-		setIsSigningIn(true);
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
 		const username = usernameRef.current.value;
+		let userCreated;
+		let toastID;
+		
+		try{
+			toastID = toast.loading("Signing In...");
+			userCreated = await createUser(email, password, username);
+		} 
+		catch (err){
+			resolveToast(toastID, getErrorMessage(err.code), "error");
+			console.log(err.code);
+			console.log(err.message);
+			return false;
+		}
 
-		console.log("Creating user"); 
-		const userCreated = await createUser(email, password, username);
 		if( userCreated ){
-			console.log("User creation process completed")
 			const user = auth.currentUser;
-			console.log(user);
-			if(user){
-				getUserData(user.uid)
-				.then(userData=>{
+			if( user ){
+				getUserData(user.uid).then((userData)=>{
 					userData.coinsOwned = userData.coinsOwned.sort(compare);
-					getCoinList()
-					.then(coinList=>{
-						// fetching USDT for USDtoINR conversion
+					getCoinList().then((coinList)=>{
 						fetchCoin("tether").then((coinData)=>{
-							coinData.json().then(coinData=>{
-								console.log({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
-								setUserCredentials({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
-								setIsSigningIn(false);
+							coinData.json().then((coinData)=>{
+								const userInfoObject = {
+									...userData,
+									coinList,
+									USDtoINR: coinData.market_data.current_price.inr
+								};
+								console.log(userInfoObject);
+								setUserCredentials(userInfoObject);
+								resolveToast(toastID, "Account created ✅", "success");
 								navigate("/home");
 							})
 						})
 					})
 					.catch(err=>{
+						resolveToast(toastID, getErrorMessage(err.code), "error");
 						console.log("error while fetching coinList");
-						console.error(err);
+						console.error(err.message);
 					})
 				})
 			}
-			// setUserCredentials(userCreated);
-			// navigate("/home");
 		}
 	}
 
 	return <div className='signup-container'>
-		{ isSigningIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> }
+		{/* { isSigningIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> } */}
 		<img src="bitcoin-wallet.png" alt="Logo" />
 		<div className='project-title'>
 			ALTFOLIO		

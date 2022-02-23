@@ -8,6 +8,8 @@ import {useUserCredentials} from "../../Modules/Context/UserContext";
 import {getUserData} from "../../Modules/Firebase/QueryDocuments";
 import {enableOnAuthStateChanged, loginUser} from "../../Modules/Firebase/Authentication";
 import {getCoinList, fetchCoin} from "../../Modules/Coins/CoinInfo";
+import { toast, getErrorMessage, resolveToast } from '../Utilities/ToastMessages';
+import useUpdateTitle from "../Utilities/UpdateTitle";
 import Input from "../Utilities/Input";
 
 function compare(a, b){
@@ -23,17 +25,15 @@ function compare(a, b){
 function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
-	const [isLogggingIn, setIsLoggingIn] = useState(false);
+	// const [isLogggingIn, setIsLoggingIn] = useState(false);
 	const [_, setUserCredentials] = useUserCredentials();
 	const navigate = useNavigate();
+	let toastID;
 
-	useLayoutEffect(()=>{
-		document.title = "Altfolio | Login";
-	});
+	useUpdateTitle("Altfolio | Login")
 
 	useEffect(()=>{
 		const handleUserLogIn = () => {
-			setIsLoggingIn(true);
 			const user = auth.currentUser;
 			if(user){
 				getUserData(user.uid)
@@ -46,40 +46,43 @@ function Login() {
 							coinData.json().then(coinData=>{
 								console.log({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
 								setUserCredentials({...userData, coinList, USDtoINR: coinData.market_data.current_price.inr});
-								setIsLoggingIn(false);
+								toast.success("Logged in successfully 💯")
 								navigate("/home");
 							})
 						})
 					})
-					.catch(err=>{
-						console.log("error while fetching coinList");
-						console.error(err);
-					})
+				})
+				.catch(err=>{
+					console.error(err.message);
 				})
 			}
 		}
 		
 		const unsubscribe = enableOnAuthStateChanged(handleUserLogIn);
 		return () => {
-			// console.log("Unsubscribing");
 			unsubscribe()
 		};
 	}, [setUserCredentials, navigate]);
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		setIsLoggingIn(true);
 		const email = emailRef.current.value;
 		const password = passwordRef.current.value;
-		console.log(email, password);
-		console.log("logging  user"); 
-		loginUser(email, password);
-		setIsLoggingIn(false);
+
+		toastID = toast.loading("Auto Logging in");
+		loginUser(email, password)
+		.then(()=>{
+			resolveToast(toastID, "Logged in successfully 💯", "success");
+		})
+		.catch((err)=>{
+			resolveToast(toastID, getErrorMessage(err.code), "error");
+			console.log(err.message);
+		})
 	}
 
 	return (
 		<div className="login-container">
-			{ isLogggingIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> }
+			{/* { isLogggingIn ? <Loading type="spin" color="#000" /> : <div style={{display: "none"}}></div> } */}
 			<img src="bitcoin-wallet.png" alt="Logo" />
 			<div className='project-title'>
 				ALTFOLIO		

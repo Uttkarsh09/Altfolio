@@ -5,7 +5,6 @@ import {useUserCredentials} from "../../Modules/Context/UserContext";
 
 function CoinList({isLoading, coinInfo, onAddCoinHandler, updateCoinToShowInDetailedView}){
     const [userCredentials, setUserCredentials] = useUserCredentials();
-    console.log("IN COIN LIST")
     console.log(isLoading);
 	return <div className="coin-list-container">
         {
