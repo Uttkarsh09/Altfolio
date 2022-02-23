@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useRef, useEffect} from 'react';
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/login.css";
 import Loading from '../Utilities/Loading';
@@ -25,7 +25,6 @@ function compare(a, b){
 function Login() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
-	// const [isLogggingIn, setIsLoggingIn] = useState(false);
 	const [_, setUserCredentials] = useUserCredentials();
 	const navigate = useNavigate();
 	let toastID;

@@ -1,7 +1,9 @@
-import React, {useLayoutEffect} from 'react'
+import {useLayoutEffect} from 'react'
 
 function useUpdateTitle(title) {
-    document.title = title;
+    useLayoutEffect(()=>{
+        document.title = title;
+    })
 }
 
 export default useUpdateTitle;

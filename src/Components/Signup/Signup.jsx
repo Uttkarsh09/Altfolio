@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useRef, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {createUser} from "../../Modules/Firebase/Authentication";
 import { auth } from '../../Modules/Firebase/GetFirebaseInfo';
 import "../../Styles/CSS/signup.css";

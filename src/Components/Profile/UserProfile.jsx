@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useMemo, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import "../../Styles/CSS/userProfile.css";
+import useUpdateTitle from "../Utilities/UpdateTitle";
 import {useNavigate} from "react-router-dom";
 import { getCoinsInfo } from '../../Modules/Coins/CoinInfo';
 import { logout } from '../../Modules/Firebase/Authentication';
@@ -49,18 +50,18 @@ function UserProfile() {
 		})
 	}
 
-	useLayoutEffect(()=>{
-		document.title = "Altfolio | User Profile";
-	});
+	useUpdateTitle("Altfolio | User Profile");
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const coinsOwnedMemo = useMemo(()=> userCredentials.coinsOwned, []);
 	useEffect(()=>{
-		getCoinsInfo(coinsOwnedMemo).then((coinInfo)=>{
-			console.log("Setting coin info")
-			setCoinInfo(coinInfo);
-		});
-	}, [coinsOwnedMemo])
+		if(userCredentials.coinsOwned.length !== 0){
+			getCoinsInfo(coinsOwnedMemo).then((coinInfo)=>{
+				console.log("Setting coin info")
+				setCoinInfo(coinInfo);
+			});
+		}
+	}, [coinsOwnedMemo, userCredentials.coinsOwned.length])
 
 	if(userCredentials.coinsOwned.length !== 0){
 		userCredentials.coinsOwned.forEach(coinOwned=>{
@@ -148,7 +149,7 @@ function UserProfile() {
 					</div>
 				</div>
 			</div>
-
+			
 			<div className="user-area">
 				<div className='username'>
 					<div className='text'>
@@ -157,44 +158,58 @@ function UserProfile() {
 				</div>
 
 				<div className="stats">
-					<div className='pie-chart'>
-						<Pie data={pieChartData} />
-					</div>
-					{/* <div className='bar-graph'>
-						<Bar options={barGraphOptions} data={barGraphData} />	
-					</div> */}
-					<div className="text-stats">
-						<div className='heading'>Statistics</div>
-						<div className='stats-box'>
-							<div className="stat">
-								<span className='property-name'>Total Invested Amount: </span>
-								<span className='value'>{Math.round(totalInvestedAmount, 4)}</span>
+					{
+						userCredentials.coinsOwned.length === 0 ? 
+						<NoCoinsToShow /> :
+						<>
+							<div className='pie-chart'>
+								<Pie data={pieChartData} />
 							</div>
-							<div className="stat">
-								<span className='property-name'>Current Invested Value: </span>
-								<span className='value'>{Math.round(totalCurrentInvestedValue, 4)}</span>
+							{/* <div className='bar-graph'>
+								<Bar options={barGraphOptions} data={barGraphData} />	
+							</div> */}
+							<div className="text-stats">
+								<div className='heading'>Statistics</div>
+								<div className='stats-box'>
+									<div className="stat">
+										<span className='property-name'>Total Invested Amount: </span>
+										<span className='value'>{Math.round(totalInvestedAmount, 4)}</span>
+									</div>
+									<div className="stat">
+										<span className='property-name'>Current Invested Value: </span>
+										<span className='value'>{Math.round(totalCurrentInvestedValue, 4)}</span>
+									</div>
+									<div className="stat">
+										<span className='property-name'>Net Gain: </span>
+										<span className='value'>
+											{Math.round(totalCurrentInvestedValue - totalInvestedAmount, 4)}
+										</span>
+									</div>
+									<div className="stat">
+										<span className='property-name'>Net Gain(%): </span>
+										<span className='value'>
+											{
+												Math.round(((totalCurrentInvestedValue - totalInvestedAmount)/totalInvestedAmount*100), 4)
+											}%
+										</span>
+									</div>
+								</div>
 							</div>
-							<div className="stat">
-								<span className='property-name'>Net Gain: </span>
-								<span className='value'>
-									{Math.round(totalCurrentInvestedValue - totalInvestedAmount, 4)}
-								</span>
-							</div>
-							<div className="stat">
-								<span className='property-name'>Net Gain(%): </span>
-								<span className='value'>
-									{
-										Math.round(((totalCurrentInvestedValue - totalInvestedAmount)/totalInvestedAmount*100), 4)
-									}%
-								</span>
-							</div>
-							
-						</div>
-					</div>
+						</>
+					}
 				</div>
-			</div>
+			</div> 
 		</div>
 	)
 }
 
+function NoCoinsToShow(){
+	return <div className='no-coins-to-show'>
+		<img src="exclamation-circle.svg" alt='No Coins Added'/>
+		<div className='no-coins-text'>No coins added</div>
+	</div>
+}
+
 export default UserProfile;
+
+{/* <img src="https://img.icons8.com/external-filled-agus-raharjo/64/000000/external-exclamation-mark-justice-filled-agus-raharjo.png"/> */}

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import CoinList from './CoinList';
 import DetailedView from './DetailedView';
@@ -9,6 +9,7 @@ import {useUserCredentials} from "../../Modules/Context/UserContext";
 import AddCoinForm from './AddCoinForm';
 import SellCoinForm from './SellCoinForm';
 import {logout} from "../../Modules/Firebase/Authentication";
+import useUpdateTitle from "../Utilities/UpdateTitle";
 
 const tempUserCredentialsStructure = {
     "coinsOwned": [],
@@ -31,9 +32,7 @@ function Home() {
 	const hideAddNewCoinForm = () => { setShowAddForm(false); }
 	const hideSellCoinForm = () => {setShowSellForm(false)}
 
-	useLayoutEffect(()=>{
-		document.title = "Altfolio | Home";
-	});
+	useUpdateTitle("Altfolio | Home");
 
 	const updateCoinToShowInDetailedView = (coinID) => {
 		coinInfo.every((coin, idx)=>{
